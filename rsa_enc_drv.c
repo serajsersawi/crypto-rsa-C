@@ -37,9 +37,9 @@ void main(int argc, char *argv[]) {
 
     /* Encrypt the message */
     rsa_encrypt(plaintext, ciphertext, msg_sz, e, n);
-
+	printf("encrypted\n");
     /* Print the ciphertext */
-    for (int i = 0; i < 2 * msg_sz; i++) {
-        printf("%c", p_cipher[i]);
-    }
+	for (int i = 0; i < msg_sz; i++) {
+		printf("%04x ", ciphertext[i]); // Assuming rsa_encrypt outputs ciphertext in i16_t format
+	}
 }
