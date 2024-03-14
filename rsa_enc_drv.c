@@ -30,9 +30,10 @@ void main(int argc, char *argv[]) {
     n = atoi(argv[2]);
 
     /* Get the plaintext message */
-    while (scanf("%c", &plaintext[msg_sz]) != "\n") {
-        msg_sz++;
-    }
+	int read_char;
+	while ((read_char = scanf("%c", &plaintext[msg_sz])) == 1 && plaintext[msg_sz] != '\n') {
+		msg_sz++;
+	}
 
     /* Encrypt the message */
     rsa_encrypt(plaintext, ciphertext, msg_sz, e, n);

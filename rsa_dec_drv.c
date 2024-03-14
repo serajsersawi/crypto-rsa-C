@@ -30,9 +30,10 @@ void main(int argc, char *argv[]) {
     n = atoi(argv[2]);
 
     /* Get the ciphertext message */
-    while (scanf("%c", &p_cipher[msg_sz]) != -1) {
-        msg_sz++;
-    }
+	int read_char;
+	while ((read_char = scanf("%c", &p_cipher[msg_sz])) == 1 && p_cipher[msg_sz] != '\n') {
+		msg_sz++;
+	}
 
     /* Update the message size */
     msg_sz = msg_sz / 2;
