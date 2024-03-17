@@ -60,11 +60,16 @@ int main() {
     for (int i = 0; i < len; i++) {
         printf("%hu ", ciphertext[i]); // Print each encrypted character's numerical value
     }
-    printf("\n\n\n ____________________________________\n\n");
+    printf("\n\n\n____________________________________\n\n");
 	printf("Now launch the receiver application (receiver_app.exe)\n");
 	printf("and provide the private key (d) and copy paste the ciphertext you got here\n");
 	printf("if you get the same plaintext back then the process is validated :)\n");
-	printf("\n ____________________________________\n\n");
+	printf("\n____________________________________\n\n");
+	
+	printf("It is recommended to keep this windows open to copy data\n"); 
+	printf("Press ENTER key to Exit!\n"); 
+	getchar(); 	
+	getchar();
 
     return 0;
 }

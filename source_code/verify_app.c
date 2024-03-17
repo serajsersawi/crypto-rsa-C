@@ -48,6 +48,10 @@ int main() {
     } else {
         printf("XX Verification failed: The message is not authentic.\n");
     }
+	
+	printf("Press ENTER key to Exit!\n"); 
+	getchar(); 	
+	getchar();
 
     return 0;
 }

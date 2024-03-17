@@ -48,6 +48,11 @@ int main() {
         printf("%c", plaintext[i]); // Print each decrypted character
     }
     printf("\n\n");
+	
+	printf("It is recommended to keep this windows open to copy data\n"); 
+	printf("Press ENTER key to Exit!\n");  
+	getchar(); 
+	getchar();
 
     return 0;
 }

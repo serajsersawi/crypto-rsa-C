@@ -47,11 +47,16 @@ int main() {
         printf("%hu ", signature[i]);
     }
 	
-    printf("\n\n\n ____________________________________\n\n");
+    printf("\n\n\n____________________________________\n\n");
 	printf("Now launch the verification application (verify_app.exe)\n");
 	printf("and provide the public key (e) and copy paste the message and signature you got here\n");
 	printf("the program will get back to you whether the message is authentic ot not :)\n");
-	printf("\n ____________________________________\n\n");
+	printf("\n____________________________________\n\n");
+	
+	printf("It is recommended to keep this windows open to copy data\n"); 
+	printf("Press ENTER key to Exit!\n"); 
+	getchar(); 	
+	getchar();
 
     return 0;
 }
