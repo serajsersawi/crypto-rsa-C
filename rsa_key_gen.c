@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <stdio.h>
 #include "./rsa_key_gen.h"
 
 /**
@@ -127,12 +128,15 @@ void rsa_key_gen(i16_t *p_e, i16_t *p_d, i16_t *p_n) {
 
     /* Generate two prime numbers */
     _gen_prime_nbs(&p, &q);
+	//printf("p = %d\n", p);
+	//printf("q = %d\n", q);
 
     /* Find the value of n */
     n = (i16_t)p * (i16_t)q;
 
     /* Find the value of totient(n) */
     phi_n = (i16_t)(p - 1) * (i16_t)(q - 1);
+	//printf("phi = %d\n", phi_n);
 
     /* Find a number between 1..totient(n) which is coprime with totient(n) */
     e = rand() % (phi_n - 2) + 2;

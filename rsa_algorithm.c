@@ -87,7 +87,7 @@ void rsa_decrypt(
 
 // Function to sign a message (or its hash)
 void rsa_sign(
-        uint16_t  *message,  // The message or hash to sign
+        uint8_t  *message,  // The message or hash to sign
         uint16_t *signature, // The resulting signature
         uint64_t len,        // Length of the message
         uint16_t d,          // Private exponent
@@ -100,7 +100,7 @@ void rsa_sign(
 
 // Function to verify a signature
 int rsa_verify(
-        uint16_t  *message,   // The original message or its hash
+        uint8_t  *message,   // The original message or its hash
         uint16_t *signature,  // The signature to verify
         uint64_t len,         // Length of the message
         uint16_t e,           // Public exponent
