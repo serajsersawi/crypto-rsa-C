@@ -11,7 +11,10 @@ int main() {
     uint16_t d, n;
     int len = 0;
 	char inputLine[1024]; // Buffer to hold the input line
-
+	
+	printf("\n____________________________________\n");
+	printf("EE5001 -- CA2 -- Sarraj Alsersawi ");
+	printf("\n____________________________________");
 	printf("\n____________________________________\n");
 	printf("RSA Encryption -- Receiver side ");
 	printf("\n____________________________________\n\n");

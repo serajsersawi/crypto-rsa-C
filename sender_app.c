@@ -13,6 +13,9 @@ int main() {
 	// Allocate memory for ciphertext (should be the same size as plaintext length)
     uint16_t ciphertext[2048];
 	printf("\n____________________________________\n");
+	printf("EE5001 -- CA2 -- Sarraj Alsersawi ");
+	printf("\n____________________________________");
+	printf("\n____________________________________\n");
 	printf("RSA Encryption -- Sender side ");
 	printf("\n____________________________________\n\n");
 	// Prompt and read in the plaintext from the user
