@@ -6,13 +6,13 @@
 #include "rsa_keygen.h"
 
 
-bool _is_coprime(int a, int b) {
-
-    if (!b) {
-        return a == 1;
+bool coprime_check(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
     }
-
-    return _is_coprime(b, a % b);
+    return a == 1; // If GCD is 1, numbers are coprime
 }
 
 
@@ -110,14 +110,14 @@ void rsa_key_gen(uint16_t *p_e, uint16_t *p_d, uint16_t *p_n) {
     /* Find a number between 1..totient(n) which is coprime with totient(n) */
     e = rand() % (phi_n - 2) + 2;
     /* Update e till it becomes coprime */
-    if (!_is_coprime(e, phi_n)) {
+    if (!coprime_check(e, phi_n)) {
 
         uint16_t _e = e;
 
         do {
             /* Check the next number */
             _e = (_e == (phi_n - 1)) ? 2 : (_e + 1);
-        } while ((_e != e) && !_is_coprime(_e, phi_n));
+        } while ((_e != e) && !coprime_check(_e, phi_n));
 
         e = _e;
     }
