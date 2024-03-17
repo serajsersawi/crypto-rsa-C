@@ -1,11 +1,7 @@
 #include <stdio.h>
 #include "rsa_keygen.h"
 
-/**
- * @brief Driver program which generates the public and private keys for RSA
- *        algorithm.
- *
- */
+
 void main() {
 
     uint16_t e;
@@ -13,10 +9,10 @@ void main() {
     uint16_t n;
 
     /* Generate the keys */
-    rsa_key_gen(&e, &d, &n);
+    rsa_generate_keys(&e, &d, &n);
 
     /* Print the values */
-    printf("e = %d\n", e);
-    printf("d = %d\n", d);
-    printf("n = %d\n", n);
+    printf("Public key e = %d\n", e);
+    printf("Private key d = %d\n", d);
+    printf("Modulus n = %d\n", n);
 }
