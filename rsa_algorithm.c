@@ -84,3 +84,38 @@ void rsa_decrypt(
         plaintext[i] = (uint8_t)mod_exp(ciphertext[i], d, n);
     }
 }
+
+// Function to sign a message (or its hash)
+void rsa_sign(
+        uint16_t  *message,  // The message or hash to sign
+        uint16_t *signature, // The resulting signature
+        uint64_t len,        // Length of the message
+        uint16_t d,          // Private exponent
+        uint16_t n) {        // Modulus
+    // Sign each block of the message
+    for (int i = 0; i < len; i++) {
+        signature[i] = mod_exp(message[i], d, n);
+    }
+}
+
+// Function to verify a signature
+int rsa_verify(
+        uint16_t  *message,   // The original message or its hash
+        uint16_t *signature,  // The signature to verify
+        uint64_t len,         // Length of the message
+        uint16_t e,           // Public exponent
+        uint16_t n) {         // Modulus
+    uint16_t verification[len];
+    // "Decrypt" the signature to recover the original message/hash
+    for (int i = 0; i < len; i++) {
+        verification[i] = mod_exp(signature[i], e, n);
+    }
+    
+    // Check if the verified message/hash matches the original message/hash
+    for (int i = 0; i < len; i++) {
+        if (message[i] != verification[i]) {
+            return 0; // Verification failed
+        }
+    }
+    return 1; // Verification successful
+}
