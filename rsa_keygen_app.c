@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "./rsa_key_gen.h"
+#include "rsa_keygen.h"
 
 /**
  * @brief Driver program which generates the public and private keys for RSA
@@ -8,9 +8,9 @@
  */
 void main() {
 
-    i16_t e;
-    i16_t d;
-    i16_t n;
+    uint16_t e;
+    uint16_t d;
+    uint16_t n;
 
     /* Generate the keys */
     rsa_key_gen(&e, &d, &n);

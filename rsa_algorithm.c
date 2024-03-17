@@ -1,15 +1,7 @@
 
 #include <stdint.h>
 #include "rsa_algorithm.h"
-/**
- * @brief Finds the value of a^b (mod m)
- *
- * @param a
- * @param b
- * @param m
- * @return uint16_t
- */
- 
+
 /*calculates the modular exponentiation of a raised to the power of b modulo m.*/
 uint16_t mod_exp(uint16_t a, uint16_t b, uint16_t m) {
 
@@ -41,15 +33,6 @@ uint16_t mod_exp(uint16_t a, uint16_t b, uint16_t m) {
     return ans;
 }
 
-/**
- * @brief Encrypts the given message using the given public key components
- *
- * @param plaintext
- * @param ciphertext
- * @param len
- * @param e
- * @param n
- */
 void rsa_encrypt(
         uint8_t  *plaintext,
         uint16_t *ciphertext,
@@ -63,15 +46,7 @@ void rsa_encrypt(
     }
 }
 
-/**
- * @brief Decrypts the given cipher using the given private key components
- *
- * @param plaintext
- * @param ciphertext
- * @param len
- * @param d
- * @param n
- */
+
 void rsa_decrypt(
         uint8_t  *plaintext,
         uint16_t *ciphertext,
@@ -85,7 +60,6 @@ void rsa_decrypt(
     }
 }
 
-// Function to sign a message (or its hash)
 void rsa_sign(
         uint8_t  *message,  // The message or hash to sign
         uint16_t *signature, // The resulting signature

@@ -3,16 +3,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdio.h>
-#include "./rsa_key_gen.h"
+#include "rsa_keygen.h"
 
-/**
- * @brief Checks if the two given numbers are coprime or not
- *
- * @param a
- * @param b
- * @return true
- * @return false
- */
+
 bool _is_coprime(int a, int b) {
 
     if (!b) {
@@ -22,14 +15,7 @@ bool _is_coprime(int a, int b) {
     return _is_coprime(b, a % b);
 }
 
-/**
- * @brief Finds the multiplicative inverses of the two numbers
- *
- * @param a
- * @param b
- * @param x
- * @param y
- */
+
 void _extended_euclid(int a, int b, int *x, int *y) {
 
     /* If second number is zero */
@@ -49,13 +35,6 @@ void _extended_euclid(int a, int b, int *x, int *y) {
     *y = _x;
 }
 
-/**
- * @brief Returns the multiplicative inverse of a under base m
- *
- * @param a
- * @param m
- * @return int
- */
 int _mod_inv(int a, int m) {
 
     int inv_a, inv_m;
@@ -71,16 +50,10 @@ int _mod_inv(int a, int m) {
     return inv_a;
 }
 
-/**
- * @brief Generate two 8-bit prime numbers
- *
- * @param p
- * @param q
- */
-void _gen_prime_nbs(i8_t *p_p, i8_t *p_q) {
+void _gen_prime_nbs(uint8_t *p_p, uint8_t *p_q) {
 
     /* Array of all 8 bit prime numbers */
-    static i8_t _prime_nbs[] = {
+    static uint8_t _prime_nbs[] = {
             2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,
             47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103,
             107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163,
@@ -89,13 +62,13 @@ void _gen_prime_nbs(i8_t *p_p, i8_t *p_q) {
         };
 
     /* Select the first prime number randomly */
-    int p_idx = rand() % (sizeof(_prime_nbs)/sizeof(i8_t));
+    int p_idx = rand() % (sizeof(_prime_nbs)/sizeof(uint8_t));
 
     /* Select the second prime number randomly */
-    int q_idx = rand() % (sizeof(_prime_nbs)/sizeof(i8_t));
+    int q_idx = rand() % (sizeof(_prime_nbs)/sizeof(uint8_t));
 
     /* Check for their validity */
-    while (((i16_t)_prime_nbs[p_idx] * (i16_t)_prime_nbs[q_idx]) < 256u) {
+    while (((uint16_t)_prime_nbs[p_idx] * (uint16_t)_prime_nbs[q_idx]) < 256u) {
 
         if (_prime_nbs[p_idx] < _prime_nbs[q_idx]) {
             p_idx++;
@@ -109,41 +82,37 @@ void _gen_prime_nbs(i8_t *p_p, i8_t *p_q) {
     *p_q = _prime_nbs[q_idx];
 }
 
-/**
- * @brief Generate the public-private key components to be used for the RSA
- *        algorithm
- *
- * @param p_e
- * @param p_d
- * @param p_n
- */
-void rsa_key_gen(i16_t *p_e, i16_t *p_d, i16_t *p_n) {
+void rsa_key_gen(uint16_t *p_e, uint16_t *p_d, uint16_t *p_n) {
 
-    i8_t p, q;
-    i16_t n, phi_n;
-    i16_t e, d;
+    uint8_t p, q;
+    uint16_t n, phi_n;
+    uint16_t e, d;
 
     /* Set the seed for random numbers */
     srand(getpid());
 
     /* Generate two prime numbers */
     _gen_prime_nbs(&p, &q);
-	//printf("p = %d\n", p);
-	//printf("q = %d\n", q);
+	
+	#if DEBUG 
+	printf("p = %d\n", p); 
+	printf("q = %d\n", q);
+	#endif
 
     /* Find the value of n */
-    n = (i16_t)p * (i16_t)q;
+    n = (uint16_t)p * (uint16_t)q;
 
     /* Find the value of totient(n) */
-    phi_n = (i16_t)(p - 1) * (i16_t)(q - 1);
+    phi_n = (uint16_t)(p - 1) * (uint16_t)(q - 1);
+	#if DEBUG
 	//printf("phi = %d\n", phi_n);
-
+	#endif
     /* Find a number between 1..totient(n) which is coprime with totient(n) */
     e = rand() % (phi_n - 2) + 2;
     /* Update e till it becomes coprime */
     if (!_is_coprime(e, phi_n)) {
 
-        i16_t _e = e;
+        uint16_t _e = e;
 
         do {
             /* Check the next number */
